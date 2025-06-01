@@ -17,6 +17,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void delete(long id) throws Exception {
         try {
+            Book book = bookRepository.findById(id).orElseThrow(() -> new Exception("Book not found with id: " + id));
             bookRepository.deleteById(id);
 
         } catch (Exception e) {
@@ -26,12 +27,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAll() {
-        try {
-            List<Book> listBooks = bookRepository.findAll();
-            return listBooks;
-        } catch (Exception e) {
-            throw new RuntimeException("Error retrieving all books", e);
-        }
+        return bookRepository.findAll();
     }
 
     @Override
@@ -39,20 +35,48 @@ public class BookServiceImpl implements BookService {
         try {
             return bookRepository.findById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Error retrieving book with id: " + id, e);
+            throw new Exception("Error retrieving book with id: " + id);
         }
     }
 
     @Override
-    public Book creat(BookRequest entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'creat'");
+    public Book creat(BookRequest bookRequest) throws Exception {
+        try {
+            Book book = new Book();
+            book.setAuthor(bookRequest.getAuthor());
+            book.setAvailableCopies(bookRequest.getAvailableCopies());
+            book.setIsbn(bookRequest.getIsbn());
+            book.setPrice(bookRequest.getPrice());
+            book.setPublishYear(bookRequest.getPublishYear());
+            book.setPublisher(bookRequest.getPublisher());
+            book.setShelfLocation(bookRequest.getPublisher());
+            book.setTitle(bookRequest.getTitle());
+            book.setTotalCopies(bookRequest.getTotalCopies());
+
+            return bookRepository.save(book);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public Book update(long id, BookRequest entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public Book update(long id, BookRequest bookRequest) throws Exception {
+        try {
+            Book book = bookRepository.findById(id).orElseThrow(() -> new Exception("Book not found with id: " + id));
+            book.setAuthor(bookRequest.getAuthor());
+            book.setAvailableCopies(bookRequest.getAvailableCopies());
+            book.setIsbn(bookRequest.getIsbn());
+            book.setPrice(bookRequest.getPrice());
+            book.setPublishYear(bookRequest.getPublishYear());
+            book.setPublisher(bookRequest.getPublisher());
+            book.setShelfLocation(bookRequest.getPublisher());
+            book.setTitle(bookRequest.getTitle());
+            book.setTotalCopies(bookRequest.getTotalCopies());
+
+            return bookRepository.save(book);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override

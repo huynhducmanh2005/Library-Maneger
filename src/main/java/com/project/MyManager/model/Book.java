@@ -40,10 +40,10 @@ public class Book {
    private double totalCopies;
 
    @Column(name = "available_copies", nullable = false)
-   private String availableCopies;
+   private long availableCopies;
 
    @Column(name = "shelf_location", nullable = false)
-   private long shelfLocation;
+   private String shelfLocation;
 
    @Column(name = "price", nullable = false)
    private double price;

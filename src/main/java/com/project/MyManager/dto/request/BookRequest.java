@@ -48,16 +48,16 @@ public class BookRequest {
     @Max(value = 10000000, message = "Total copies cannot exceed 10000000")
     private double totalCopies;
 
-    @NotBlank(message = "Available copies is required")
+    @NotNull(message = "Available copies is required")
+    @Min(value = 0, message = "Available copies cannot be negative")
+    @Max(value = 10000000, message = "Available copies cannot exceed 10000000")
     @JsonProperty("available_copies")
-    @Size(min = 1, max = 10, message = "Available copies must be between 1 and 10 characters")
-    private String availableCopies;
+    private long availableCopies;
 
-    @NotNull(message = "Shelf location is required")
     @JsonProperty("shelf_location")
-    @Min(value = 1, message = "Shelf location must be at least 1")
-    @Max(value = 1000000000, message = "Shelf location cannot exceed 1000000000")
-    private long shelfLocation;
+    @NotBlank(message = "Shelf location is required")
+    @Size(min = 1, max = 50, message = "Shelf location must be between 1 and 50 characters")
+    private String shelfLocation;
 
     @NotNull(message = "Price is required")
     @JsonProperty("price")
