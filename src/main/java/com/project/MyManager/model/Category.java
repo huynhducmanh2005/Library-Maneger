@@ -23,8 +23,10 @@ public class Category {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
     @Column(name = "description", nullable = true)
     private String description;
+    
     @Column(name = "parent_category_id", nullable = true)
     private Category parentCategory;
 }

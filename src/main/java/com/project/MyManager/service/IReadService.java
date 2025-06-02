@@ -13,6 +13,6 @@ public interface IReadService<T, ID> {
 
     List<T> getAll();
 
-    Optional<T> getById(long id);
+    Optional<T> getById(long id) throws Exception;
 
 }
